@@ -1,0 +1,45 @@
+<div class="body-container">
+  <div class="login-container">
+    <form [formGroup]="loginForm" class="login-items">
+      <h1>WELCOME</h1>
+
+      <mat-form-field
+        class="full-width"
+        appearance="fill"
+        style="color: #2b547e"
+      >
+        <mat-label>Email</mat-label>
+        <input matInput type="text" formControlName="email" />
+        <mat-icon matSuffix>mail</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field
+        class="full-width"
+        appearance="fill"
+        style="color: #2b547e"
+      >
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="showPassword ? 'text' : 'password'"
+          formControlName="password"
+        />
+        <mat-icon
+          style="cursor: pointer"
+          matTooltip="Visibility"
+          matSuffix
+          (click)="showPassword = !showPassword"
+          >{{ showPassword ? "visibility" : "visibility_off" }}</mat-icon
+        >
+      </mat-form-field>
+    </form>
+    <button
+      mat-flat-button
+      color="primary"
+      class="btn"
+      [disabled]="!loginForm.valid"
+    >
+      Log in
+    </button>
+  </div>
+</div>
