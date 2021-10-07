@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './login.component';
 
@@ -8,9 +9,9 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
-    })
-    .compileComponents();
+      declarations: [LoginComponent],
+      imports: [ReactiveFormsModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -22,4 +23,16 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should toggle showPassword', () => {
+    expect(component.showPassword).toBeFalsy();
+    component.toggleShowPassword();
+    expect(component.showPassword).toBeTruthy();
+  });
+
+  // TBA
+
+  // Should not be able to enter characters more than the specified range in each field
+
+  // Form should be valid before enabling
 });

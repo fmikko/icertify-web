@@ -19,4 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}
+
+  toggleShowPassword(): void {
+    this.showPassword = !this.showPassword;
+  }
 }
