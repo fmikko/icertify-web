@@ -13,7 +13,6 @@ type Collection = 'test_collections' | 'test_collections_2';
 })
 export class ApiService {
   // env
-
   constructor(@Inject(HttpService) public http: HttpService) {}
 
   // fn
