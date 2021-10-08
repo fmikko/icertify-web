@@ -12,6 +12,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/login/login.module').then((o) => o.LoginModule),
   },
+  {
+    path: 'portal-superadmin',
+    loadChildren: () =>
+      import('./pages/portal-superadmin/portal-superadmin.module').then(
+        (o) => o.PortalSuperadminModule
+      ),
+  },
 ];
 
 @NgModule({

@@ -22,6 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
+import { MatSliderModule } from '@angular/material/slider';
 import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
@@ -32,6 +33,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSliderModule,
     MatChipsModule,
     MatButtonModule,
     MatSnackBarModule,
@@ -72,6 +74,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatTooltipModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatSliderModule,
   ],
 })
 export class MaterialModule {}
