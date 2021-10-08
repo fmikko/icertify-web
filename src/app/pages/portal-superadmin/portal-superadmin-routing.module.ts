@@ -7,15 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: PortalSuperadminComponent,
-    children: [
-      {
-        path: 'add-user',
-        loadChildren: () =>
-          import('./pages/add-user/add-user.module').then(
-            (o) => o.AddUserModule
-          ),
-      },
-    ],
+  },
+  {
+    path: 'add-user',
+    loadChildren: () =>
+      import('./pages/add-user/add-user.module').then((o) => o.AddUserModule),
   },
 ];
 
