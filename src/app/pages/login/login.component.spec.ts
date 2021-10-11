@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -28,11 +29,24 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should toggle showPassword', () => {
-    expect(component.showPassword).toBeFalsy();
-    component.toggleShowPassword();
-    expect(component.showPassword).toBeTruthy();
-  });
+  // it('should toggle showPassword', () => {
+  //   expect(component.showPassword).toBeFalsy();
+  //   component.toggleShowPassword();
+  //   expect(component.showPassword).toBeTruthy();
+  // });
+
+  it('disabled login button if one of the field is empty[email/password]',()=>{
+    let formCred = component.loginForm 
+
+  formCred.setValue({
+    email:'sample@gmail.com',
+    password:'12345'
+
+  })
+   const loginBtn = fixture.debugElement.query(By.css('button'));
+    expect(formCred.valid).toBeTrue()
+  })
+  
 
   // TBA
 
