@@ -13,6 +13,13 @@ const routes: Routes = [
       import('./pages/login/login.module').then((o) => o.LoginModule),
   },
   {
+    path: 'register',
+    loadChildren: () =>
+      import('./pages/registration/registration.module').then(
+        (o) => o.RegistrationModule
+      ),
+  },
+  {
     path: 'portal-superadmin',
     loadChildren: () =>
       import('./pages/portal-superadmin/portal-superadmin.module').then(

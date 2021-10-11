@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
         this.isLoggingin = false;
         this.sb.open('Success', 'Okay', {
           duration: 5000,
-          panelClass: ['sucess'],
+          panelClass: ['success'],
         });
       },
       (error) => {

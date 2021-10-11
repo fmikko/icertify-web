@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { URL } from 'src/app/config/url';
+import { RegisterForm } from '../../models/register.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -32,5 +33,9 @@ export class AuthService {
       { email, password },
       this.getHeaders()
     );
+  }
+
+  register(body: RegisterForm) {
+    return this.http.post(this.url + '/user/user', body);
   }
 }
