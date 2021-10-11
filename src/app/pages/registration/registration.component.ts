@@ -8,7 +8,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { RegisterForm } from 'src/app/shared/models/register.interface';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -17,29 +18,23 @@ import { ErrorStateMatcher } from '@angular/material/core';
 })
 export class RegistrationComponent implements OnInit {
   // env
-  checkPasswords: ValidatorFn = (
-    group: AbstractControl
-  ): ValidationErrors | null => {
-    let pass = group.get('password')?.value;
-    let passConfirm = group.get('passwordConfirm')?.value;
-    return pass === passConfirm ? null : { notSame: true };
-  };
 
   showPassword: boolean = false;
-  registerForm = this.fb.group(
-    {
-      firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
-      middleName: new FormControl(''),
-      email: new FormControl('', [Validators.email, Validators.required]),
-      password: new FormControl('', [Validators.required]),
-      passwordConfirm: new FormControl(''),
-      mobileNumber: new FormControl('', [Validators.required]),
-    },
-    { validator: this.checkPasswords }
-  );
+  registerForm = this.fb.group({
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    // middleName: new FormControl(''),
+    email: new FormControl('', [Validators.email, Validators.required]),
+    password: new FormControl('', [Validators.required]),
+    passwordConfirm: new FormControl(''),
+    mobileNumber: new FormControl('', [Validators.required]),
+  });
 
-  constructor(private sb: MatSnackBar, private fb: FormBuilder) {}
+  constructor(
+    private sb: MatSnackBar,
+    private fb: FormBuilder,
+    private auth: AuthService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -49,7 +44,45 @@ export class RegistrationComponent implements OnInit {
 
   //fn
 
-  register() {}
+  register() {
+    // set body
+    let body: RegisterForm = {
+      firstName: this.registerForm.getRawValue().firstName,
+      lastName: this.registerForm.getRawValue().lastName,
+      email: this.registerForm.getRawValue().email,
+      password: this.registerForm.getRawValue().password,
+      passwordConfirm: this.registerForm.getRawValue().passwordConfirm,
+      mobileNumber: this.registerForm.getRawValue().number,
+    };
+
+    // check both passwords
+    if (
+      !(
+        this.registerForm.getRawValue().password ===
+        this.registerForm.getRawValue().passwordConfirm
+      )
+    ) {
+      this.sb.open('Password did not match!', 'Okay!', {
+        duration: 5000,
+        panelClass: ['failed'],
+      });
+    } else {
+      this.auth.register(body).subscribe(
+        (res: any) => {
+          this.sb.open('Success', 'Okay', {
+            duration: 5000,
+            panelClass: ['success'],
+          });
+        },
+        (error) => {
+          this.sb.open('Please input correct value', 'Okay', {
+            duration: 3000,
+            panelClass: ['failed'],
+          });
+        }
+      );
+    }
+  }
 
   // utils
   numberInputOnly(event: any) {
